@@ -9,9 +9,9 @@ export const getSquaredArray = arr => arr.map(num => num ** 2);
 
 export const getOddNumbers = arr => arr.filter(num => num % 2 !== 0);
 
-const getSum = (a, b) => a + b;
-export default getSum();
+export default (a, b) => a + b;
+// export default getSum();
 
-console.log(getSquaredArray([1, 2, 3, 4, 5]));
-console.log(getOddNumbers([1, 2, 3, 4, 5]));
-console.log(getSum(2, 5));
+// console.log(getSquaredArray([1, 2, 3, 4, 5]));
+// console.log(getOddNumbers([1, 2, 3, 4, 5]));
+// console.log(getSum(2, 5));
