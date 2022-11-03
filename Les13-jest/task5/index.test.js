@@ -13,6 +13,34 @@ it('should testing array on input', () => {
   expect(type).toEqual(null);
 });
 
+// var 1 => fail ??
+// describe('should get account balance', () => {
+//   const testCases = [
+//     {
+//       in: (['Ann', 'John', 'User'], [1400, 87, -6], 'John', 50),
+//       expected: 37,
+//     },
+//     {
+//       in: (['Ann', 'John', 'User'], [1400, 87, -6], 'User', 10),
+//       expected: -1,
+//     },
+//      {
+//       in: (['Ann', 'John', 'User'], [1400, 87, -6], 'Ann', 100),
+//       expected: 1300,
+//     },
+//   ];
+//   testCases.forEach(test => {
+//     it(
+//       `in : ${test.in} expected : ${test.expected}`,
+//       () => {
+//         const res = withdraw(test.in);
+//         expect(res).toEqual(test.expected);
+//       }
+//     )
+//   })
+// });
+
+// var 2
 it('should get account balance', () => {
   const resBalance1 = withdraw(['Ann', 'John', 'User'], [1400, 87, -6], 'John', 50);
   expect(resBalance1).toEqual(37);
