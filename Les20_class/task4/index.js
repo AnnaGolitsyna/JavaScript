@@ -25,11 +25,11 @@ class Order {
   constructor(price, city, type) {
     this.price = Number(price);
     this.city = city.toString();
-    this.type = undefined;
-    this.ID = Math.random().toString();
+    this.type = type;
+    this.id = Math.random().toString();
     this.isConfirmed = false;
     this.dateCreated = new Date();
-    this.dateConfirmed = undefined;
+    this.dateConfirmed = new Date();
   }
 
   checkPrice() {
@@ -39,22 +39,24 @@ class Order {
 
   confirmOrder() {
     console.log('conform');
-    this.isConfirmed = true;
-    this.dateConfirmed = Date();
+    if (this.isConfirmed === false) {
+      this.isConfirmed = true;
+      console.log((this.dateConfirmed = Date()));
+      this.dateConfirmed = this.dateCreated;
+    }
+
   }
 
-  isValidType(type) {
-
+  isValidType() {
     console.log('valid', this.type);
-    if (type === 'Sell' || type === 'Buy') {
-      this.type = type;
+    if (this.type === 'Sell' || this.type === 'Buy') {
       return true;
     }
     return false;
   }
 }
 
-const order1 = new Order(1500, 'london');
+const order1 = new Order(1500, 'london', 'sel');
 console.log(order1);
 console.log(order1.checkPrice());
 console.log(order1.confirmOrder());
