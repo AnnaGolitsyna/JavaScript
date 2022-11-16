@@ -42,4 +42,4 @@ const renderTasks = tasksList => {
 
 renderTasks(tasks);
 
-export { tasks, renderTasks }
+// export { tasks, renderTasks }
