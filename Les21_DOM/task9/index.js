@@ -27,4 +27,4 @@ export const finishList = () => {
   listElem.append(newLi8);
 };
 
-finishList();
+// finishList();
