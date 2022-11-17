@@ -8,16 +8,23 @@
 export const finishList = () => {
   const listElem = document.querySelector('.list');
   const listItemElem = document.querySelectorAll('li');
-  console.log(listItemElem);
-  const newItemElem = document.createElement('li');
-  console.log(newItemElem);
-  listElem.prepend((newItemElem.textContent = '1'));
-  console.log(listElem);
+
+  const newLi1 = document.createElement('li');
+  newLi1.textContent = '1';
+  listElem.prepend(newLi1);
+
   const middleItem = document.querySelector('.special');
-  console.log(middleItem);
-  middleItem.before((newItemElem.textContent = '4'));
-  middleItem.after((newItemElem.textContent = '6'));
-  listElem.append((newItemElem.textContent = '8'));
+  const newLi4 = document.createElement('li');
+  newLi4.textContent = '4';
+  middleItem.before(newLi4);
+
+  const newLi6 = document.createElement('li');
+  newLi6.textContent = '6';
+  middleItem.after(newLi6);
+
+  const newLi8 = document.createElement('li');
+  newLi8.textContent = '8';
+  listElem.append(newLi8);
 };
 
-// finishList();
+finishList();
