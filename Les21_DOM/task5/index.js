@@ -5,12 +5,8 @@
 // export f
 
 export const setTitle = text => {
-    const elem = document.querySelector('.title');
-    elem.textContent = text;
-    console.log(elem);
-    return elem;
+  this.document.querySelector('.title').textContent = text;
+  console.log((this.document.querySelector('.title').textContent = text));
 };
 
 setTitle('Anna');
-
-
