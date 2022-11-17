@@ -20,4 +20,4 @@ export const finishList = () => {
   listElem.append((newItemElem.textContent = '8'));
 };
 
-finishList();
+// finishList();
