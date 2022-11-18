@@ -5,12 +5,10 @@
 
 export const getSection = num => {
   const el = document.querySelector(`span[data-number='${num}']`);
-  console.log(el);
+
   const pearent = el.closest('.box');
-  console.log(pearent, pearent.dataset);
-  const pearentsValue = pearent.dataset.section;
-  console.log(pearentsValue);
-  return pearentsValue;
+
+  return pearent.dataset.section;
 }
 // getSection('3');
 // getSection('5');
