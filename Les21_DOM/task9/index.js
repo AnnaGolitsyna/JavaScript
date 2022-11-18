@@ -7,8 +7,7 @@
 
 export const finishList = () => {
   const listElem = document.querySelector('.list');
-  const listItemElem = document.querySelectorAll('li');
-
+  
   const newLi = text => {
     const li = document.createElement('li');
     li.textContent = text;
@@ -24,4 +23,4 @@ export const finishList = () => {
   listElem.append(newLi('8'));
 };
 
-// finishList();
+finishList();
