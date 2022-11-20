@@ -6,9 +6,9 @@
 // but Attach handlers => enable handler /default - enable/
 // but Remove handlers => turns off the handler /default - enable/
 
-const elemDiv = document.querySelector('.rect_div');
-const elemP = document.querySelector('.rect_p');
-const elemSpan = document.querySelector('.rect_span');
+const divElem = document.querySelector('.rect_div');
+const pElem = document.querySelector('.rect_p');
+const spanElem = document.querySelector('.rect_span');
 
 const logTarget = (text, color) => {
   const eventsListElem = document.querySelector('.events-list');
@@ -25,14 +25,14 @@ const logGreySpan = logTarget.bind(null, 'SPAN', 'grey');
 const logGreenSpan = logTarget.bind(null, 'SPAN', 'green');
 
 function handleClick() {
-  elemDiv.addEventListener('click', logGreyDiv, true);
-  elemDiv.addEventListener('click', logGreenDiv);
+  divElem.addEventListener('click', logGreyDiv, true);
+  divElem.addEventListener('click', logGreenDiv);
 
-  elemP.addEventListener('click', logGreyP, true);
-  elemP.addEventListener('click', logGreenP);
+  pElem.addEventListener('click', logGreyP, true);
+  pElem.addEventListener('click', logGreenP);
 
-  elemSpan.addEventListener('click', logGreySpan, true);
-  elemSpan.addEventListener('click', logGreenSpan);
+  spanElem.addEventListener('click', logGreySpan, true);
+  spanElem.addEventListener('click', logGreenSpan);
 }
 
 const clear = () => {
