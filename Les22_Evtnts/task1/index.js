@@ -35,6 +35,8 @@ function addHandleClick() {
   spanElem.addEventListener('click', logGreenSpan);
 }
 
+addHandleClick();
+
 const clear = () => {
   const eventsListElem = document.querySelector('.events-list');
   eventsListElem.innerHTML = '';
