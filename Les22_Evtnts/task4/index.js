@@ -3,7 +3,11 @@
 
 const checkboxElem = document.querySelector('.task-status');
 
-checkboxElem.addEventListener('change', () => {
+function check() {
     console.log(`${checkboxElem.checked}`);
-    console.log(`${checkboxElem.value}`);
-})
+    // console.log(`${checkboxElem.value}`);
+}
+
+check();
+
+checkboxElem.addEventListener('change', check);
