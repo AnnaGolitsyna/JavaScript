@@ -18,7 +18,7 @@ const tasks = [
 
 const listElem = document.querySelector('.list');
 const taskListId = tasks.map(elem => ({ ...elem, id: Math.random() }));
-console.log(taskListId);
+// console.log(taskListId);
 
 const renderTasks = tasksList => {
   const removeElems = () => {
@@ -46,7 +46,7 @@ const renderTasks = tasksList => {
   listElem.append(...tasksElems);
 };
 
-renderTasks(taskListId);
+// renderTasks(taskListId);
 
 const btnElem = document.querySelector('.create-task-btn');
 
