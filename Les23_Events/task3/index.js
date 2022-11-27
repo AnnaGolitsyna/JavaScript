@@ -48,20 +48,19 @@ renderTasks(tasks);
 
 const btnElem = document.querySelector('.create-task-btn');
 
-function createNewTask(arr) {
+function createNewTask() {
   const inputTextElem = document.querySelector('.task-input');
   inputTextElem.addEventListener('change', event => {
     const valueEl = event.target.value;
     if (valueEl.length === 0) return;
 
-    arr.push({ text: valueEl, done: false, id: Math.random() });
+    tasks.push({ text: valueEl, done: false, id: Math.random() });
     inputTextElem.value = '';
-    renderTasks(arr);
+    renderTasks(tasks);
   });
 }
 
-const addNewTask = createNewTask(tasks);
-btnElem.addEventListener('click', addNewTask);
+btnElem.addEventListener('click', createNewTask);
 
 const listItemHandler = event => {
   if (event.target.classList.contains('list__item-checkbox')) {
