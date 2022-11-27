@@ -18,6 +18,7 @@ const tasks = [
 
 const listElem = document.querySelector('.list');
 const taskListId = tasks.map(elem => ({ ...elem, id: Math.random() }));
+console.log(taskListId);
 
 const renderTasks = tasksList => {
   const removeElems = () => {
@@ -49,11 +50,6 @@ renderTasks(taskListId);
 
 const btnElem = document.querySelector('.create-task-btn');
 
-// const removeElems = () => {
-//   const listItemElems = document.querySelectorAll('.list__item');
-//   listItemElems.forEach(el => el.remove());
-// };
-
 function createNewTask(arr) {
   const inputTextElem = document.querySelector('.task-input');
   inputTextElem.addEventListener('change', event => {
@@ -62,7 +58,6 @@ function createNewTask(arr) {
 
     arr.push({ text: valueEl, done: false, id: Math.random() });
     inputTextElem.value = '';
-    // removeElems();
     renderTasks(arr);
   });
 }
@@ -71,19 +66,14 @@ const addNewTask = createNewTask(taskListId);
 btnElem.addEventListener('click', addNewTask);
 
 const listItemHandler = event => {
-  const check = document.querySelector(`[data-user-id="${event.target.dataset.userId}"]`);
-  const pearentCheck = check.closest('.list__item');
-  console.log(check, check.checked, pearentCheck);
-  if (event.target.classList.contains('list__item-checkbox')) {
-    const findId = taskListId.find(({ id }) => id == event.target.dataset.userId);
-    findId.done = check.checked;
-    pearentCheck.classList.toggle('list__item_done');
-    // removeElems();
+  const inputEl = event.target;
+  if (inputEl.classList.contains('list__item-checkbox')) {
+    const findId = taskListId.find(({ id }) => id == inputEl.dataset.userId);
+    findId.done = inputEl.checked;
+    inputEl.closest('.list__item').classList.toggle('list__item_done');
+    // console.log(taskListId);
     renderTasks(taskListId);
   }
 };
 
 listElem.addEventListener('click', listItemHandler);
-
-console.log(tasks);
-console.log(taskListId);
