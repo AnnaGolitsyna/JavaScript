@@ -9,23 +9,21 @@
 // checbox => handler click /sort/
 
 const tasks = [
-  { text: 'Buy milk', done: false },
-  { text: 'Pick up Tom from airport', done: false },
-  { text: 'Visit party', done: false },
-  { text: 'Visit doctor', done: true },
-  { text: 'Buy meat', done: true },
+  { text: 'Buy milk', done: false, id: 1 },
+  { text: 'Pick up Tom from airport', done: false, id: 2 },
+  { text: 'Visit party', done: false, id: 3 },
+  { text: 'Visit doctor', done: true, id: 4 },
+  { text: 'Buy meat', done: true, id: 5 },
 ];
 
 const listElem = document.querySelector('.list');
-const taskListId = tasks.map(elem => ({ ...elem, id: Math.random() }));
+// const taskListId = tasks.map(elem => ({ ...elem, id: Math.random() }));
 // console.log(taskListId);
 
 const renderTasks = tasksList => {
-  const removeElems = () => {
-    const listItemElems = document.querySelectorAll('.list__item');
-    listItemElems.forEach(el => el.remove());
-  };
-  removeElems();
+  const listItemElems = document.querySelectorAll('.list__item');
+  listItemElems.forEach(el => el.remove());
+
   const tasksElems = tasksList
     .sort((a, b) => a.done - b.done)
     .map(({ text, done, id }) => {
@@ -35,7 +33,7 @@ const renderTasks = tasksList => {
       checkbox.setAttribute('type', 'checkbox');
       checkbox.checked = done;
       checkbox.classList.add('list__item-checkbox');
-      checkbox.dataset.userId = id;
+      checkbox.dataset.id = id;
       if (done) {
         listItemElem.classList.add('list__item_done');
       }
@@ -46,7 +44,7 @@ const renderTasks = tasksList => {
   listElem.append(...tasksElems);
 };
 
-// renderTasks(taskListId);
+renderTasks(tasks);
 
 const btnElem = document.querySelector('.create-task-btn');
 
@@ -62,18 +60,20 @@ function createNewTask(arr) {
   });
 }
 
-const addNewTask = createNewTask(taskListId);
+const addNewTask = createNewTask(tasks);
 btnElem.addEventListener('click', addNewTask);
 
 const listItemHandler = event => {
-  const inputEl = event.target;
-  if (inputEl.classList.contains('list__item-checkbox')) {
-    const findId = taskListId.find(({ id }) => id == inputEl.dataset.userId);
+  if (event.target.classList.contains('list__item-checkbox')) {
+    const inputEl = event.target;
+    const findId = tasks.find(({ id }) => id == inputEl.dataset.id);
     findId.done = inputEl.checked;
     inputEl.closest('.list__item').classList.toggle('list__item_done');
     // console.log(taskListId);
-    renderTasks(taskListId);
+    console.log(tasks);
+    renderTasks(tasks);
   }
 };
 
 listElem.addEventListener('click', listItemHandler);
+console.log(tasks);
