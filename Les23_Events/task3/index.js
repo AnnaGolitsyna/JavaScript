@@ -9,16 +9,14 @@
 // checbox => handler click /sort/
 
 const tasks = [
-  { text: 'Buy milk', done: false, id: 1 },
-  { text: 'Pick up Tom from airport', done: false, id: 2 },
-  { text: 'Visit party', done: false, id: 3 },
-  { text: 'Visit doctor', done: true, id: 4 },
-  { text: 'Buy meat', done: true, id: 5 },
+  { text: 'Buy milk', done: false, id: '1' },
+  { text: 'Pick up Tom from airport', done: false, id: '2' },
+  { text: 'Visit party', done: false, id: '3' },
+  { text: 'Visit doctor', done: true, id: '4' },
+  { text: 'Buy meat', done: true, id: '5' },
 ];
 
 const listElem = document.querySelector('.list');
-// const taskListId = tasks.map(elem => ({ ...elem, id: Math.random() }));
-// console.log(taskListId);
 
 const renderTasks = tasksList => {
   const listItemElems = document.querySelectorAll('.list__item');
@@ -48,31 +46,29 @@ renderTasks(tasks);
 
 const btnElem = document.querySelector('.create-task-btn');
 
-function createNewTask() {
+const createNewTask = () => {
   const inputTextElem = document.querySelector('.task-input');
-  inputTextElem.addEventListener('change', event => {
-    const valueEl = event.target.value;
-    if (valueEl.length === 0) return;
+  if (inputTextElem.value === 0) return;
 
-    tasks.push({ text: valueEl, done: false, id: Math.random() });
-    inputTextElem.value = '';
-    renderTasks(tasks);
-  });
-}
+  tasks.push({ text: inputTextElem.value, done: false, id: Math.random().toString() });
+  renderTasks(tasks);
+  inputTextElem.value = '';
+};
 
 btnElem.addEventListener('click', createNewTask);
 
-const listItemHandler = event => {
+const changeClassDone = event => {
   if (event.target.classList.contains('list__item-checkbox')) {
     const inputEl = event.target;
-    const findId = tasks.find(({ id }) => id == inputEl.dataset.id);
-    findId.done = inputEl.checked;
+    const findId = tasks.find(({ id }) => id === inputEl.dataset.id);
+
+    findId.done = !findId.done;
+
     inputEl.closest('.list__item').classList.toggle('list__item_done');
-    // console.log(taskListId);
     console.log(tasks);
     renderTasks(tasks);
   }
 };
 
-listElem.addEventListener('click', listItemHandler);
+listElem.addEventListener('click', changeClassDone);
 console.log(tasks);
