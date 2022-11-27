@@ -48,7 +48,8 @@ const btnElem = document.querySelector('.create-task-btn');
 
 const createNewTask = () => {
   const inputTextElem = document.querySelector('.task-input');
-  if (inputTextElem.value === 0) return;
+  
+  if (inputTextElem.value.length === 0) return;
 
   tasks.push({ text: inputTextElem.value, done: false, id: Math.random().toString() });
   renderTasks(tasks);
@@ -71,4 +72,4 @@ const changeClassDone = event => {
 };
 
 listElem.addEventListener('click', changeClassDone);
-console.log(tasks);
+
