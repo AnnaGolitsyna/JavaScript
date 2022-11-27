@@ -17,38 +17,42 @@ const tasks = [
 ];
 
 const listElem = document.querySelector('.list');
+const taskListId = tasks.map(elem => ({ ...elem, id: Math.random() }));
 
 const renderTasks = tasksList => {
-    const tasksElems = tasksList
+  const removeElems = () => {
+    const listItemElems = document.querySelectorAll('.list__item');
+    listItemElems.forEach(el => el.remove());
+  };
+  removeElems();
+  const tasksElems = tasksList
     .sort((a, b) => a.done - b.done)
-    .map(({ text, done }) => {
+    .map(({ text, done, id }) => {
       const listItemElem = document.createElement('li');
       listItemElem.classList.add('list__item');
-      listItemElem.dataset.userId = Math.random();
       const checkbox = document.createElement('input');
       checkbox.setAttribute('type', 'checkbox');
       checkbox.checked = done;
       checkbox.classList.add('list__item-checkbox');
-      checkbox.dataset.userId = listItemElem.dataset.userId;
+      checkbox.dataset.userId = id;
       if (done) {
         listItemElem.classList.add('list__item_done');
       }
       listItemElem.append(checkbox, text);
-
       return listItemElem;
     });
 
   listElem.append(...tasksElems);
 };
 
-renderTasks(tasks);
+renderTasks(taskListId);
 
 const btnElem = document.querySelector('.create-task-btn');
 
-const removeElems = () => {
-  const listItemElems = document.querySelectorAll('.list__item');
-  listItemElems.forEach(el => el.remove());
-};
+// const removeElems = () => {
+//   const listItemElems = document.querySelectorAll('.list__item');
+//   listItemElems.forEach(el => el.remove());
+// };
 
 function createNewTask(arr) {
   const inputTextElem = document.querySelector('.task-input');
@@ -56,41 +60,30 @@ function createNewTask(arr) {
     const valueEl = event.target.value;
     if (valueEl.length === 0) return;
 
-    arr.push({ text: valueEl, done: false });
+    arr.push({ text: valueEl, done: false, id: Math.random() });
     inputTextElem.value = '';
-    removeElems();
+    // removeElems();
     renderTasks(arr);
-    // return arr;
   });
 }
 
-const addNewTask = createNewTask(tasks);
+const addNewTask = createNewTask(taskListId);
 btnElem.addEventListener('click', addNewTask);
 
-const listItemElemHandler = checkboxId => {
-  const itemId = document.querySelectorAll(`.list__item`);
-  itemId.forEach(item => {
-    if (item.dataset.userId === checkboxId) {
-      item.classList.toggle('list__item_done');
-    }
-  });
-};
-
-const changeTasksDone = arr => {
-  const check = document.querySelectorAll('.list__item-checkbox');
-
-  check.forEach((el, i) => {
-    arr[i].done = el.checked;
-  });
-};
-
-listElem.addEventListener('click', event => {
+const listItemHandler = event => {
+  const check = document.querySelector(`[data-user-id="${event.target.dataset.userId}"]`);
+  const pearentCheck = check.closest('.list__item');
+  console.log(check, check.checked, pearentCheck);
   if (event.target.classList.contains('list__item-checkbox')) {
-    listItemElemHandler(event.target.dataset.userId);
-    changeTasksDone(tasks);
-    removeElems();
-    renderTasks(tasks);
+    const findId = taskListId.find(({ id }) => id == event.target.dataset.userId);
+    findId.done = check.checked;
+    pearentCheck.classList.toggle('list__item_done');
+    // removeElems();
+    renderTasks(taskListId);
   }
-});
+};
 
+listElem.addEventListener('click', listItemHandler);
 
+console.log(tasks);
+console.log(taskListId);
