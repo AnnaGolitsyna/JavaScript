@@ -48,9 +48,7 @@ const btnElem = document.querySelector('.create-task-btn');
 
 const createNewTask = () => {
   const inputTextElem = document.querySelector('.task-input');
-  
-  if (inputTextElem.value.length === 0) return;
-
+  if (!inputTextElem.value.length) return;
   tasks.push({ text: inputTextElem.value, done: false, id: Math.random().toString() });
   renderTasks(tasks);
   inputTextElem.value = '';
@@ -58,18 +56,13 @@ const createNewTask = () => {
 
 btnElem.addEventListener('click', createNewTask);
 
-const changeClassDone = event => {
-  if (event.target.classList.contains('list__item-checkbox')) {
-    const inputEl = event.target;
-    const findId = tasks.find(({ id }) => id === inputEl.dataset.id);
-
+const changeClassDone = ({ target }) => {
+  if (target.classList.contains('list__item-checkbox')) {
+    const findId = tasks.find(({ id }) => id === target.dataset.id);
     findId.done = !findId.done;
-
-    inputEl.closest('.list__item').classList.toggle('list__item_done');
-    console.log(tasks);
+    target.closest('.list__item').classList.toggle('list__item_done');
     renderTasks(tasks);
   }
 };
 
 listElem.addEventListener('click', changeClassDone);
-
