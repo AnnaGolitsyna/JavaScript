@@ -18,9 +18,7 @@ export const creatListElem = ({text, done, id}) => {
 }
 
 export const renderTasks = () => {
-  //   const listItemElems = document.querySelectorAll('.list__item');
-  //   listItemElems.forEach(el => el.remove());
-  const tasksList = getItem('tasksList') || [];
+    const tasksList = getItem('tasksList') || [];
   listElem.innerHTML = '';
 
   const tasksElems = tasksList
@@ -30,4 +28,4 @@ export const renderTasks = () => {
   listElem.append(...tasksElems);
 };
 
-// renderTasks(tasks);
+
