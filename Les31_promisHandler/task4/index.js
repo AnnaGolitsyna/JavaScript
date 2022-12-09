@@ -17,11 +17,7 @@ const serverResponsePromise = new Promise(resolve => {
  */
 
 serverResponsePromise
-  .then(response => {
-   
-
-
-  })
+  .then(response => response.json().then(data => data))
   .then(result => {
     console.log(result); // { name: 'John', age: 20 }
   });
