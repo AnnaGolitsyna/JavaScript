@@ -19,6 +19,7 @@ export const creatListElem = ({text, done, id}) => {
 
     const deleteBtnElem = document.createElement('button');
     deleteBtnElem.classList.add('list-item__delete-btn');
+    deleteBtnElem.dataset.id = id;
     listItemElem.append(checkbox, textElem, deleteBtnElem);
     return listItemElem;
 }
