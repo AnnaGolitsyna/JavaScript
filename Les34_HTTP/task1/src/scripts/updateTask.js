@@ -1,5 +1,4 @@
 import { renderTasks } from './renderer.js';
-import { getItem, setItem } from './storage.js';
 import { getTasksList, updateTask, deleteTask } from './tasksGateway.js';
 
 // 1. create f onListClick
@@ -12,33 +11,28 @@ import { getTasksList, updateTask, deleteTask } from './tasksGateway.js';
 // 7. render
 
 const changeClassDone = (taskId, target) => {
-
   target.closest('.list-item').classList.toggle('list-item_done');
   const done = target.checked;
-  const tasksList = getItem('tasksList');
-  const { text, time } = tasksList.find(task => task.id === taskId);
+
+  let textTask;
+  getTasksList().then(tasksList => {
+    const { text, time } = tasksList.find(task => task.id === taskId);
+    textTask = text;
+  });
 
   const updatedTask = {
-    text,
+    text: textTask,
     time: Date.now(),
     done,
   };
 
-  updateTask(taskId, updatedTask)
-    .then(() => getTasksList())
-    .then(newTasksList => {
-      setItem('tasksList', newTasksList);
-      renderTasks();
-    });
+  updateTask(taskId, updatedTask).then(() => renderTasks());
+
 };
 
 const deletedTask = taskId => {
-  deleteTask(taskId)
-    .then(() => getTasksList())
-    .then(newTasksList => {
-      setItem('tasksList', newTasksList);
-      renderTasks();
-    });
+  deleteTask(taskId).then(() => renderTasks());
+
 };
 
 export const onListClick = ({ target }) => {

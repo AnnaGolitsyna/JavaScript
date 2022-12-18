@@ -9,4 +9,3 @@ export const initTodoHandlers = () => {
     listElem.addEventListener('click', onListClick);
 };
 
-// onListClick => changeClassDone OR deleteTask
