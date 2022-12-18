@@ -11,14 +11,9 @@ import { getTasksList, updateTask, deleteTask } from './tasksGateway.js';
 // 6. set local-storage
 // 7. render
 
-export const changeClassDone = ({ target }) => {
-  const isCheckbox = target.classList.contains('list-item__checkbox');
+const changeClassDone = (taskId, target) => {
 
-  if (!isCheckbox) {
-    return;
-  }
-
-  const taskId = target.dataset.id;
+  target.closest('.list-item').classList.toggle('list-item_done');
   const done = target.checked;
   const tasksList = getItem('tasksList');
   const { text, time } = tasksList.find(task => task.id === taskId);
@@ -29,8 +24,6 @@ export const changeClassDone = ({ target }) => {
     done,
   };
 
-  target.closest('.list-item').classList.toggle('list-item_done');
-
   updateTask(taskId, updatedTask)
     .then(() => getTasksList())
     .then(newTasksList => {
@@ -39,21 +32,23 @@ export const changeClassDone = ({ target }) => {
     });
 };
 
-export const deletedTask = ({ target }) => {
+const deletedTask = taskId => {
+  deleteTask(taskId)
+    .then(() => getTasksList())
+    .then(newTasksList => {
+      setItem('tasksList', newTasksList);
+      renderTasks();
+    });
+};
+
+export const onListClick = ({ target }) => {
+  const isCheckbox = target.classList.contains('list-item__checkbox');
   const isDeleteBtn = target.classList.contains('list-item__delete-btn');
- 
-  if (!isDeleteBtn) {
+  const taskId = target.dataset.id;
+
+  if (!isCheckbox && !isDeleteBtn) {
     return;
   }
 
-  const taskId = target.dataset.id;
-
-  deleteTask(taskId)
-  .then(() => getTasksList())
-  .then(newTasksList => {
-    setItem('tasksList', newTasksList);
-    renderTasks();
-  })
+  isCheckbox ? changeClassDone(taskId, target) : deletedTask(taskId);
 };
-
-export const onListClick = () => {};
