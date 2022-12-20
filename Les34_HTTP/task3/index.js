@@ -5,8 +5,6 @@
 // and GET request to alert {} => Object.fromEntries +++
 // clear all form fields +++
 
-
-
 const buttonElem = document.querySelector('.submit-button');
 buttonElem.setAttribute('disabled', false);
 
@@ -37,13 +35,13 @@ const getLoginForm = () => fetch(baseUrl).then(response => response.json());
 const onFormSubmit = event => {
   event.preventDefault();
   const formData = Object.fromEntries(new FormData(formElems));
+
   console.log(formData);
+  alert(JSON.stringify(formData));
+  saveLoginData(formData);
+  // .then(() => getLoginForm())
+  // .then(data => alert(JSON.parse(data[data.length - 1])));
   formElems.reset();
-  saveLoginData(formData)
-    .then(() => getLoginForm())
-    .then(data => alert(JSON.stringify(data[data.length - 1])));
 };
 
 formElems.addEventListener('submit', onFormSubmit);
-
-
