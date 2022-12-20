@@ -37,8 +37,10 @@ const onFormSubmit = event => {
   const formData = Object.fromEntries(new FormData(formElems));
 
   console.log(formData);
-  alert(JSON.stringify(formData));
-  saveLoginData(formData);
+  // alert(JSON.stringify(formData));
+  saveLoginData(formData)
+    .then(resp => resp.text())
+    .then(data => alert(data));
   // .then(() => getLoginForm())
   // .then(data => alert(JSON.parse(data[data.length - 1])));
   formElems.reset();
