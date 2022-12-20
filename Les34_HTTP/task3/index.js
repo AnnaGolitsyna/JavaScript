@@ -5,7 +5,7 @@
 // and GET request to alert {} => Object.fromEntries +++
 // clear all form fields +++
 
-import { saveLoginData, getLoginForm } from './loginsGateway.js';
+
 
 const buttonElem = document.querySelector('.submit-button');
 buttonElem.setAttribute('disabled', false);
@@ -20,6 +20,19 @@ const formChangeHandler = () => {
   }
 };
 formElems.addEventListener('input', formChangeHandler, false);
+
+const baseUrl = 'https://639acdd831877e43d676cd31.mockapi.io/logins';
+
+const saveLoginData = loginData =>
+  fetch(baseUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    body: JSON.stringify(loginData),
+  });
+
+const getLoginForm = () => fetch(baseUrl).then(response => response.json());
 
 const onFormSubmit = event => {
   event.preventDefault();
