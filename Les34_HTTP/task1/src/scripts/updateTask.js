@@ -14,25 +14,22 @@ const changeClassDone = (taskId, target) => {
   target.closest('.list-item').classList.toggle('list-item_done');
   const done = target.checked;
 
-  let textTask;
+
   getTasksList().then(tasksList => {
-    const { text, time } = tasksList.find(task => task.id === taskId);
-    textTask = text;
+    const { text } = tasksList.find(task => task.id === taskId);
+
+    const updatedTask = {
+      text,
+      time: Date.now(),
+      done,
+    };
+
+    updateTask(taskId, updatedTask).then(() => renderTasks());
   });
-
-  const updatedTask = {
-    text: textTask,
-    time: Date.now(),
-    done,
-  };
-
-  updateTask(taskId, updatedTask).then(() => renderTasks());
-
 };
 
 const deletedTask = taskId => {
   deleteTask(taskId).then(() => renderTasks());
-
 };
 
 export const onListClick = ({ target }) => {
