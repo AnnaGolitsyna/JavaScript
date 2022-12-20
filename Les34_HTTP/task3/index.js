@@ -35,10 +35,8 @@ const onFormSubmit = event => {
 
   saveLoginData(formData)
     .then(resp => resp.json())
-    .then(data => alert(JSON.stringify(data)));
-
-    formElems.reset();
-    buttonElem.setAttribute('disabled', false);
+    .then(data => {alert(JSON.stringify(data)); formElems.reset()});
+       buttonElem.setAttribute('disabled', false);
 };
 
 formElems.addEventListener('submit', onFormSubmit);
