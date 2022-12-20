@@ -30,7 +30,7 @@ const saveLoginData = loginData =>
     body: JSON.stringify(loginData),
   });
 
-const getLoginForm = () => fetch(baseUrl).then(response => response.json());
+// const getLoginForm = () => fetch(baseUrl).then(response => response.json());
 
 const onFormSubmit = event => {
   event.preventDefault();
@@ -39,8 +39,8 @@ const onFormSubmit = event => {
   console.log(formData);
   // alert(JSON.stringify(formData));
   saveLoginData(formData)
-    .then(resp => resp.text())
-    .then(data => alert(data));
+    .then(resp => resp.json())
+    .then(data => alert(JSON.stringify(data)));
   // .then(() => getLoginForm())
   // .then(data => alert(JSON.parse(data[data.length - 1])));
   formElems.reset();
